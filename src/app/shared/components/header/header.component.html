@@ -1,0 +1,45 @@
+<nav
+  class="navbar navbar-expand-lg bg-primary mb-3 p-2 rounded-bottom-2"
+  [ngClass]="themeService.getCurrent() === 'light' ? 'navbar-dark' : 'navbar-light'"
+>
+  <div class="container-fluid d-flex">
+    <a class="navbar-brand" [routerLink]="'.'">Task Manager</a>
+
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+      <ul
+        class="navbar-nav"
+        [ngClass]="{'text-center': !isMenuCollapsed}"
+        style="width: 100%"
+      >
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Examples</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">About</a>
+        </li>
+        <span style="width: 100%"></span>
+        <!--User info will be a dropdown-->
+        <li class="nav-item mx-1">
+          <a class="nav-link" style="cursor: pointer">
+            example@gmail.com
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            (click)="onSwitchTheme()"
+            style="cursor: pointer"
+          >
+            <i *ngIf="themeService.getCurrent() === 'dark'" class="bi bi-brightness-high-fill"></i>
+            <i *ngIf="themeService.getCurrent() === 'light'" class="bi bi-moon-stars-fill"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
