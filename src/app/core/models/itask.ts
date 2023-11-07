@@ -3,7 +3,8 @@ export interface ITask {
   title: string;
   description: string;
   isDone: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  startDate: Date;
+  // If has end date set allDay to false.
+  endDate?: Date;
   userId: number;
 }
