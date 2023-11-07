@@ -1,0 +1,9 @@
+<div class="row-cols-1" >
+  <full-calendar [options]='calendarOptions' style="max-height: 90vh; max-width: 100%">
+    <ng-template let-arg>
+      <b>{{ arg.timeText }}</b>
+      <i>{{ arg.event.title }}</i>
+    </ng-template>
+  </full-calendar>
+
+</div>

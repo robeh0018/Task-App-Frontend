@@ -1,0 +1,21 @@
+<div class="modal-header border-bottom-1 border-dark">
+  <h4 class="modal-title">Modal title</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row p-2">
+      <div class="col-12 p-1">
+        <label class="form-label" for="title">Title:</label>
+        <input id="title" type="text" class="form-control border-dark">
+      </div>
+      <div class="col-12 p-1">
+        <label class="form-label" for="description">Description:</label>
+        <textarea id="description" class="form-control border-dark"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer border-top-1 border-dark">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+</div>

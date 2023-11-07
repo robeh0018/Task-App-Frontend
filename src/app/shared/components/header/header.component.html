@@ -1,7 +1,7 @@
 <nav
-  class="navbar navbar-expand-lg bg-primary mb-3 p-2 rounded-bottom-2"
-  [ngClass]="themeService.getCurrent() === 'light' ? 'navbar-dark' : 'navbar-light'"
+  class="navbar navbar-expand-lg bg-primary navbar-dark mb-3 p-2 rounded-bottom-2"
 >
+  <!--  [ngClass]="themeService.getCurrent() === 'light' ? 'navbar-light' : 'navbar-dark'"-->
   <div class="container-fluid d-flex">
     <a class="navbar-brand" [routerLink]="'.'">Task Manager</a>
 
@@ -9,23 +9,28 @@
 
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul
-        class="navbar-nav"
+        class="navbar-nav ms-2"
         [ngClass]="{'text-center': !isMenuCollapsed}"
         style="width: 100%"
       >
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Features</a>
+          <a class="nav-link text-center" routerLink="calendar" (click)="isMenuCollapsed = true">
+            <i class="bi bi-calendar-check-fill mx-0 px-0"></i>
+            Calendar
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Examples</a>
+          <a class="nav-link" routerLink="task-list" (click)="isMenuCollapsed = true">
+            <i class="bi bi-list-task"></i>
+            Task List
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">About</a>
-        </li>
-        <span style="width: 100%"></span>
         <!--User info will be a dropdown-->
-        <li class="nav-item mx-1">
+        <li class="nav-item"
+            [class.ms-auto]="isMenuCollapsed"
+        >
           <a class="nav-link" style="cursor: pointer">
+            <i class="bi bi-person-fill"></i>
             example@gmail.com
           </a>
         </li>
