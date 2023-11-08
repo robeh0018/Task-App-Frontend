@@ -1,0 +1,119 @@
+<div class="container-sm" style="height: 100vh">
+  <div class="d-flex h-100">
+    <div
+      class="login-box m-auto rounded-4 bg-gradient text-center px-3 py-5">
+
+      <!--Title section-->
+      <div class="mb-4">
+        <h3><span class="text-primary"><i class="bi bi-person-square"></i></span> {{isLogin ? 'Log In ' : 'Sign Up'}}
+        </h3>
+        <p class="subtitle">Enter your credentials bellow</p>
+      </div>
+
+      <!--User form-->
+      <form [formGroup]="userForm">
+
+        <!--Full Name-->
+        <div *ngIf="!isLogin" class="form-floating mb-4">
+          <input
+            type="text"
+            class="form-control bg-secondary-subtle rounded-3"
+            id="fullName"
+            placeholder="First Middle Last"
+            formControlName="fullName"
+            [class.is-invalid]="userForm.get('fullName')?.invalid && userForm.get('fullName')?.touched"
+          >
+          <label for="fullName">Full Name</label>
+          <!--Error message-->
+          <p
+            class="input-error-text"
+            *ngIf="userForm.get('fullName')?.invalid && userForm.get('fullName')?.touched">
+            This field is required!
+          </p>
+        </div>
+
+        <!--Email -->
+        <div class="form-floating mb-4">
+          <input
+            type="email"
+            class="form-control bg-primary-subtle rounded-3"
+            id="email"
+            placeholder="name@example.com"
+            formControlName="email"
+            [class.is-invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+          >
+          <label for="email">Email address</label>
+          <!--Error message-->
+          <p
+            class="input-error-text"
+            *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+            {{ userForm.get('email')?.hasError('required') ? 'This field is required!' : 'Should be a valid email!' }}
+          </p>
+        </div>
+
+        <!--Password-->
+        <div class="form-floating mb-4">
+          <input
+            type="password"
+            class="form-control bg-secondary-subtle rounded-3"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+            [class.is-invalid]="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+          >
+          <label for="password">Password</label>
+          <!--Error message-->
+          <p
+            class="input-error-text"
+            *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+            {{ userForm.get('password')?.hasError('required') ? 'This field is required!' : 'Should be longer than 6.' }}
+          </p>
+        </div>
+
+        <!--Buttons-->
+        <!--Submit button-->
+        <button
+          type="submit"
+          [disabled]="userForm.invalid"
+          class="btn btn-primary w-100  rounded-3"
+          (click)="onSubmit()"
+        >{{isLogin ? 'Log In ' : 'Sign Up'}}</button>
+
+        <!--To log in link-->
+        <p *ngIf="!isLogin"
+           class="mt-1 subtitle">
+          Already have an account?
+          <a href (click)="switchLoginAndRegisterMode($event)">
+            Log In
+          </a>
+        </p>
+
+        <!--To sign up link-->
+        <p *ngIf="isLogin"
+           class="mt-1 subtitle">
+          Have no an account already?
+          <a href (click)="switchLoginAndRegisterMode($event)">
+            Sign Up
+          </a>
+        </p>
+
+        <!--Separator-->
+        <div class="d-flex align-items-center my-2">
+          <hr>
+          <span class="subtitle px-3">or</span>
+          <hr>
+        </div>
+
+        <!--Google sign button-->
+        <button class="btn btn-secondary w-100 rounded-3">
+          <i class="bi bi-google"></i>
+          {{isLogin ? 'Log In ' : 'Sign Up'}} with Google
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
