@@ -1,14 +1,28 @@
 import {Routes} from '@angular/router';
 
 export const routes: Routes = [
-  {path: '', redirectTo: 'calendar', pathMatch: 'full'},
+  {path: '', redirectTo: 'auth', pathMatch: 'full'},
+
+  /** Auth routes */
   {
-    path: 'calendar',
-    loadComponent: () => import('./components/calendar/calendar.component').then(c => c.CalendarComponent)
+    path: 'auth',
+    loadComponent: () => import('./auth').then(c => c.AuthComponent),
   },
+
+  /** Features routes */
   {
-    path: 'task-list',
-    loadComponent: () => import('./components/task-list/task-list.component').then(c => c.TaskListComponent)
+    path: '',
+    loadComponent: () => import('./components').then(c => c.HomeComponent),
+    children: [
+      {
+        path: 'calendar',
+        loadComponent: () => import('./components').then(c => c.CalendarComponent)
+      },
+      {
+        path: 'task-list',
+        loadComponent: () => import('./components').then(c => c.TaskListComponent)
+      },
+    ]
   },
-  {path: '**', redirectTo: 'calendar', pathMatch: 'full'}
+  {path: '**', redirectTo: 'auth', pathMatch: 'full'}
 ];
