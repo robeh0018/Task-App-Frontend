@@ -2,6 +2,13 @@ import {Component} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
+/** NgRx Imports */
+import {Store} from "@ngrx/store";
+
+/** Store imports */
+import {AppState} from "../app.reducer";
+import * as authActions from '../store/auth/auth.actions';
+
 @Component({
   selector: 'app-auth',
   standalone: true,
@@ -17,9 +24,16 @@ export class AuthComponent {
   isLogin: boolean = true;
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  /**-------------------------------------------------------------------------------------------- */
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AppState>,
+  ) {
     this.userForm = this.initForm();
   }
+
+  /**-------------------------------------------------------------------------------------------- */
 
   switchLoginAndRegisterMode($event: Event) {
     $event.preventDefault();
@@ -27,10 +41,17 @@ export class AuthComponent {
     this.userForm = this.initForm();
   }
 
-  onSubmit() {
-    console.log(this.userForm.value)
+  /**-------------------------------------------------------------------------------------------- */
+
+  onSubmit(): void {
+    if (this.isLogin) {
+      this.store.dispatch(authActions.login(this.userForm.value));
+    } else {
+      this.store.dispatch(authActions.register(this.userForm.value));
+    }
   }
 
+  /**-------------------------------------------------------------------------------------------- */
 
   private initForm(): FormGroup {
     if (this.isLogin) {
