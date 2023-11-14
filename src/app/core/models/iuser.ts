@@ -1,11 +1,10 @@
-import {ITask} from "./itask";
+import {UserRoles} from "../enums";
 
 export interface IUser {
   id: number;
   fullName: string;
   email: string;
   password: string;
-  role: string;
+  roles: UserRoles[];
   isActive: boolean;
-  tasks: ITask[];
 }
