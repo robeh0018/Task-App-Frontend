@@ -1,8 +1,9 @@
 import {Routes} from '@angular/router';
 
-export const routes: Routes = [
-  {path: '', redirectTo: 'auth', pathMatch: 'full'},
+/** Core Imports */
+import {authGuard} from "./core";
 
+export const routes: Routes = [
   /** Auth routes */
   {
     path: 'auth',
@@ -11,18 +12,25 @@ export const routes: Routes = [
 
   /** Features routes */
   {
+    canActivate: [authGuard],
     path: '',
     loadComponent: () => import('./components').then(c => c.HomeComponent),
     children: [
       {
         path: 'calendar',
-        loadComponent: () => import('./components').then(c => c.CalendarComponent)
+        loadComponent: () => import('./components').then(c => c.CalendarComponent),
       },
       {
         path: 'task-list',
-        loadComponent: () => import('./components').then(c => c.TaskListComponent)
+        loadComponent: () => import('./components').then(c => c.TaskListComponent),
       },
-    ]
+
+      /** Automatically redirect to calendar */
+      {path: '', redirectTo: 'calendar', pathMatch: 'full'},
+    ],
   },
-  {path: '**', redirectTo: 'auth', pathMatch: 'full'}
+
+  /** Will be the 404 page */
+  {path: '**', redirectTo: 'auth', pathMatch: 'full'},
+
 ];

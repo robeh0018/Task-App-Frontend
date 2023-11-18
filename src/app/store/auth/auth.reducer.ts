@@ -22,12 +22,21 @@ export const initialAuthState: AuthState = {
 export const authReducer = createReducer(
   initialAuthState,
 
-  /** ------------------------------Login ------------------------------------------------------------------*/
+  /** ------------------------------Login and Register -----------------------------------------------------*/
 
   on(actions.login, actions.register, (state) => {
     return {
       ...state,
       isLoading: true
+    }
+  }),
+
+  /** ------------------------------Logout ------------------------------------------------------------------*/
+
+  on(actions.logout, (state) => {
+    return {
+      ...state,
+      user: null,
     }
   }),
 

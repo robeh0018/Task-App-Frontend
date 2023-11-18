@@ -25,6 +25,12 @@ export const register = createAction(
   }>()
 );
 
+/** ------------------------------Logout Action----------------------------------------------------------*/
+
+export const logout = createAction(
+  '[Auth] Logout'
+);
+
 /** ------------------------------Auth Success----------------------------------------------------------*/
 
 export const authSuccess = createAction(
